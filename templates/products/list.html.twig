@@ -1,0 +1,33 @@
+
+
+{% for product in products %}
+<div class="container product-item">
+    <div class="item-title">{{ product.title }}</div>
+    <div class="item-image" style="background-image: url({{ product.image }});">
+        <table class="details-table">
+            <tr>
+                <td>Rate</td>
+                <td>:</td>
+                <td>{{ product.rating.rate }}</td>
+            </tr>
+            <tr>
+                <td>Count</td>
+                <td>:</td>
+                <td>{{ product.rating.count }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="item-data">
+        <table class="details-table">
+            <tr>
+                <td>
+                    <button type="button">Buy</button>
+                </td>
+                <td>
+                    <span class="price">{{ product.price|format_currency('EUR', {fraction_digit: 2}) }}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endfor %}

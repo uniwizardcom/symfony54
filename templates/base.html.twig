@@ -7,10 +7,14 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="/css/general.css?t={{ date().timestamp }}"  />
+            <link rel="stylesheet" href="/css/products.css?t={{ date().timestamp }}"  />
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="/js/general.js?t={{ date().timestamp }}"  defer></script>
+            <script src="/js/products.js?t={{ date().timestamp }}"  defer></script>
         {% endblock %}
     </head>
     <body>

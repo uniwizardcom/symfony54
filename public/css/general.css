@@ -1,0 +1,13 @@
+
+html, body {
+    font-size: 12px;
+}
+
+.centered {
+    text-align: center;
+}
+
+div.container {
+    overflow: hidden;
+    width: auto;
+}

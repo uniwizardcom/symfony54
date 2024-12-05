@@ -20,7 +20,12 @@ class Orders
     /**
      * @ORM\Column(type="smallint")
      */
-    private $canceled;
+    private $canceled = false;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $sended = false;
 
     public function getId(): ?int
     {
@@ -35,6 +40,18 @@ class Orders
     public function setCanceled(int $canceled): self
     {
         $this->canceled = $canceled;
+
+        return $this;
+    }
+
+    public function getSended(): ?int
+    {
+        return $this->sended;
+    }
+
+    public function setSended(int $sended): self
+    {
+        $this->sended = $sended;
 
         return $this;
     }
