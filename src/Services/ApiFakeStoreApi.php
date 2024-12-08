@@ -41,11 +41,64 @@ class ApiFakeStoreApi
             'https://fakestoreapi.com/products'
         );
 
-        $statusCode = $response->getStatusCode(); // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0]; // $contentType = 'application/json'
-        $content = $response->getContent(); // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray(); // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+//        $statusCode = $response->getStatusCode(); // $statusCode = 200
+//        $contentType = $response->getHeaders()['content-type'][0]; // $contentType = 'application/json'
+//        $content = $response->getContent(); // $content = '{"id":521583, "name":"symfony-docs", ...}'
+//        $content = $response->toArray(); // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
 
-        return $content;
+        return $response->toArray();
+    }
+
+    /**
+     * @param int[] $ids
+     *
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getProductsByIds(array $ids): array
+    {
+        $response = $this->client->request(
+            'GET',
+            'https://fakestoreapi.com/products'
+        );
+
+        $results = [];
+        foreach($response->toArray() as $product) {
+            if(in_array((int)$product['id'], $ids)) {
+                $results[(int)$product['id']] = $product;
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return array|null
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getProduct(int $id): ?array
+    {
+        $response = $this->client->request(
+            'GET',
+            'https://fakestoreapi.com/products'
+        );
+
+        foreach($response->toArray() as $product) {
+            if((int)$product['id'] === $id) {
+                return $product;
+            }
+        }
+
+        return null;
     }
 }

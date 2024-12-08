@@ -1,0 +1,13 @@
+
+table.order-items,
+table.order-items td {
+    border: 1px solid #000;
+}
+
+table.order-items th {
+    border: 1px solid #000;
+}
+
+table.order-items tr.order-item-current td {
+    background-color: #ccc;
+}

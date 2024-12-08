@@ -3,33 +3,42 @@
 {% block title %}Orders index{% endblock %}
 
 {% block body %}
+<div class="example-wrapper container">
     <h1>Orders index</h1>
 
-    <table class="table">
+    <a href="{{ path('app_index') }}">Home</a>
+
+    <table class="order-items">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Canceled</th>
+                <th>Count of items</th>
+                <th>Count of products</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for order in orders %}
-            <tr>
+            <tr class="order-item{% if order_current == order.id %}-current{% endif %}">
                 <td>{{ order.id }}</td>
                 <td>{{ order.canceled }}</td>
+                <td>{{ order.countOfItems() }}</td>
+                <td>{{ order.countOfProducts() }}</td>
                 <td>
                     <a href="{{ path('app_orders_show', {'id': order.id}) }}">show</a>
                     <a href="{{ path('app_orders_edit', {'id': order.id}) }}">edit</a>
+                    <a href="{{ path('app_orders_set_current', {'id': order.id}) }}">set current</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('app_orders_new') }}">Create new</a>
+</div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Services\ApiFakeStoreApi;
+use App\Services\OrderSession;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/index", name="app_index")
      */
-    public function index(ApiFakeStoreApi $api): Response
+    public function index(ApiFakeStoreApi $api, OrderSession $orderSession): Response
     {
         $products = [];
         try {
@@ -35,6 +36,7 @@ class IndexController extends AbstractController
         return $this->render('index.html.twig', [
             'site_title' => 'Order Management Service',
             'products'   => $products,
+            'order_id' => $orderSession->getOrderId(),
         ]);
     }
 }

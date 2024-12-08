@@ -3,9 +3,12 @@
 {% block title %}Orders{% endblock %}
 
 {% block body %}
+<div class="example-wrapper container">
     <h1>Orders</h1>
 
-    <table class="table">
+    <a href="{{ path('app_index') }}">Home</a>
+
+    <table class="order-items">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -23,4 +26,5 @@
     <a href="{{ path('app_orders_edit', {'id': order.id}) }}">edit</a>
 
     {{ include('orders/_delete_form.html.twig') }}
+</div>
 {% endblock %}

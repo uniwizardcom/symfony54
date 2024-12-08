@@ -21,7 +21,7 @@
         <table class="details-table">
             <tr>
                 <td>
-                    <button type="button">Buy</button>
+                    <a href="{{ path('app_orders_add_item', {'productId': product.id}) }}" class="button">Buy</a>
                 </td>
                 <td>
                     <span class="price">{{ product.price|format_currency('EUR', {fraction_digit: 2}) }}</span>

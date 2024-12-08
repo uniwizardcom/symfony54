@@ -1,6 +1,6 @@
 
 html, body {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .centered {
@@ -10,4 +10,14 @@ html, body {
 div.container {
     overflow: hidden;
     width: auto;
+}
+
+a.button {
+    display: inline-block;
+    border: 1px solid #000;
+    background-color: #f1f2f3;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin: 0 5px 5px 0;
+    font-size: 12px;
 }
