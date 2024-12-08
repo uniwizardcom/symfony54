@@ -11,6 +11,7 @@
             </td>
             <td>
                 <a href="{{ path('app_orders_index') }}" >Orders list</a>
+                <br>
                 {% if order_id and (order_id > 0) %}
                 <a href="{{ path('app_orders_show', {'id': order_id}) }}">Order: ({{ order_id }})</a>
                 {% endif %}

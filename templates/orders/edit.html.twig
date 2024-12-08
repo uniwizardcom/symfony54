@@ -9,12 +9,12 @@
     <a href="{{ path('app_index') }}">Home</a>
     <fieldset>
         <legend>Details:</legend>
-        {{ include('orders/edit/details.html.twig') }}
+        {{ include('orders/edit/details.html.twig', {'edit': true}) }}
     </fieldset>
 
     <fieldset>
         <legend>Items:</legend>
-        {{ include('orders/edit/items.html.twig') }}
+        {{ include('orders/edit/items.html.twig', {'edit': true}) }}
     </fieldset>
 </div>
 {% endblock %}

@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_order_items_update', {'id': orderItem.id}) }}">
+    <input type="number" min="0" style="width: 30px;" onchange="if(this.value > 0) {this.form.submit()} else if(confirm('Ilość 0 produktów, oznacza że produkt nie będzie brany do zamówienia')){this.form.submit()}"
+           name="order_items[products_count]" value="{{ orderItem.getProductsCount() }}" />
+    <input type="hidden" name="_token" value="{{ csrf_token('update_order_items' ~ orderItem.id) }}">
+</form>

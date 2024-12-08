@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\OrderItems;
 use App\Entity\Orders;
 use App\Form\OrdersType;
+use App\Form\OrderItemsType;
 use App\Repository\OrderItemsRepository;
 use App\Repository\OrdersRepository;
 use App\Services\ApiFakeStoreApi;
@@ -130,6 +131,39 @@ class OrdersController extends AbstractController
         }
 
         return $this->redirectToRoute('app_orders_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/orderItems/{id}", name="app_order_items_update", methods={"POST"})
+     */
+    public function updateOrderItems(Request $request, OrderItems $orderItems): Response
+    {
+        if ($this->isCsrfTokenValid('update_order_items'.$orderItems->getId(), $request->request->get('_token'))) {
+            $form = $this->createForm(OrderItemsType::class, $orderItems);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                if($orderItems->getProductsCount() < 0) {
+                    $orderItems->setProductsCount(0);
+                }
+
+                $this->orderItemsRepository->add($orderItems, true);
+            }
+        }
+
+        return $this->redirectToRoute('app_orders_edit', ['id' => $orderItems->getOrder()->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/orderItems/{id}/delete", name="app_order_items_delete", methods={"POST"})
+     */
+    public function deleteOrderItems(Request $request, OrderItems $orderItems): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$orderItems->getId(), $request->request->get('_token'))) {
+            $this->orderItemsRepository->remove($orderItems, true);
+        }
+
+        return $this->redirectToRoute('app_orders_edit', ['id' => $orderItems->getOrder()->getId()], Response::HTTP_SEE_OTHER);
     }
 
     /**

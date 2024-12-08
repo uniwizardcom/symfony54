@@ -8,18 +8,15 @@
 
     <a href="{{ path('app_index') }}">Home</a>
 
-    <table class="order-items">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ order.id }}</td>
-            </tr>
-            <tr>
-                <th>Canceled</th>
-                <td>{{ order.canceled }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <fieldset>
+        <legend>Details:</legend>
+        {{ include('orders/edit/details.html.twig') }}
+    </fieldset>
+
+    <fieldset>
+        <legend>Items:</legend>
+        {{ include('orders/edit/items.html.twig') }}
+    </fieldset>
 
     <a href="{{ path('app_orders_index') }}">back to list</a>
 

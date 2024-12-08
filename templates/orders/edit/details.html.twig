@@ -1,6 +1,22 @@
+{% if edit|default(null) %}
+    {{ include('orders/_form.html.twig', {'button_label': 'Update'}) }}
 
-{{ include('orders/_form.html.twig', {'button_label': 'Update'}) }}
+    <a href="{{ path('app_orders_index') }}">back to list</a>
 
-<a href="{{ path('app_orders_index') }}">back to list</a>
+    {{ include('orders/_delete_form.html.twig') }}
+{% else %}
+    <table class="order-items">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ order.id }}</td>
+        </tr>
+        <tr>
+            <th>Canceled</th>
+            <td>{{ order.canceled }}</td>
+        </tr>
+        </tbody>
+    </table>
 
-{{ include('orders/_delete_form.html.twig') }}
+
+{% endif %}

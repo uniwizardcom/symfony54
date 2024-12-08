@@ -12,7 +12,14 @@
     {% for orderItem in order.getOrderItems() %}
         <tr class="">
             <td>{{ orderItem.getProductId() }}</td>
-            <td>{{ orderItem.getProductsCount() }}</td>
+            <td>
+            {% if edit|default(null) %}
+                {{ include('orders/edit/_item_update_form.html.twig') }}
+                {{ include('orders/edit/_item_delete_form.html.twig') }}
+            {% else %}
+                {{ orderItem.getProductsCount() }}
+            {% endif %}
+            </td>
             <td>{{ products[orderItem.getProductId()].title }}</td>
             <td>
                 <img src="{{ products[orderItem.getProductId()].image }}" style="max-width: 100px; max-height: 100px;" />
